@@ -20,7 +20,7 @@ ZERO = 0
 
 
 # ball class
-class Ball():
+class Ball:
     def __init__(self, x, y, r, color, dx=0, dy=0):
         self.x = x
         self.y = y
@@ -76,7 +76,7 @@ def mouse_click(event):
             if main_ball.y > HEIGHT / 2:
                 main_ball.dy = -main_ball.dy
             main_ball.draw()
-        else: # turn left
+        else:  # turn left
             if main_ball.dy * main_ball.dx > 0:
                 main_ball.dy = -main_ball.dy
             else:
@@ -133,6 +133,7 @@ root = tkinter.Tk()
 root.title("Colliding Balls")
 canvas = tkinter.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG_COLOR)
 canvas.pack()
+main_ball = Ball(0, 0, 0, 0)
 canvas.bind('<Button-1>', mouse_click)
 canvas.bind('<Button-2>', mouse_click, '+')
 canvas.bind('<Button-3>', mouse_click, '+')
