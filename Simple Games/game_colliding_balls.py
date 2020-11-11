@@ -48,7 +48,8 @@ class Ball:
             self.dx = -self.dx
         if (self.y + self.r + self.dy >= HEIGHT) or (self.y - self.r + self.dy <= ZERO):
             self.dy = -self.dy
-        # ther balls collision
+
+    def check_collision(self):
         for ball in balls:
             if self.is_collision(ball):
                 if ball.color != BAD_COLOR:  # not a bad ball
@@ -58,6 +59,8 @@ class Ball:
                     self.dy = -self.dy
                 else:  # bad ball
                     self.dx = self.dy = 0
+
+    def change_position(self):
         self.hide()
         self.x += self.dx
         self.y += self.dy
@@ -119,7 +122,9 @@ def count_bad_balls(list_of_balls):
 def main():
     if 'main_ball' in globals():
         main_ball.move()
-        if len(balls) - num_of_bad_balls == 0:
+        main_ball.check_collision()
+        main_ball.change_position()
+        if len(balls) == num_of_bad_balls:
             canvas.create_text(WIDTH / 2, HEIGHT / 2, text="YOU WON!", font="Arial 20", fill="lime")
             main_ball.dx = main_ball.dy = 0
         elif main_ball.dx * main_ball.dy == 0:
