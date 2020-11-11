@@ -91,17 +91,16 @@ def mouse_click(event):
 # create a list of objects-balls
 def create_list_of_balls(number):
     lst = []
-    while len(lst) < number:
-        next_ball = Ball(random.choice(range(MAX_RADIUS, WIDTH - MAX_RADIUS)),
-                         random.choice(range(MAX_RADIUS, HEIGHT - MAX_RADIUS)),
-                         random.choice(range(MIN_RADIUS, MAX_RADIUS)),
+    for _ in range(number):
+        next_ball = Ball(random.randrange(MAX_RADIUS, WIDTH - MAX_RADIUS),
+                         random.randrange(MAX_RADIUS, HEIGHT - MAX_RADIUS),
+                         random.randrange(MIN_RADIUS, MAX_RADIUS),
                          random.choice(COLORS))
-        is_collision = False
+        # collision check
         for ball in lst:
             if next_ball.is_collision(ball):
-                is_collision = True
                 break
-        if not is_collision:
+        else:
             lst.append(next_ball)
             next_ball.draw()
     return lst
