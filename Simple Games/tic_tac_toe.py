@@ -19,7 +19,8 @@ def click_b1(event):
             if not is_table_full():
                 turn_AI()
                 draw_table()
-                if x_win("O") :
+                save_table()
+                if x_win("O"):
                     messagebox.showinfo("Information", "You lose")
                     retry()
 
@@ -64,9 +65,27 @@ def retry():
         clear_table()
         canvas.delete('all')
         draw_field_game()
-        draw_table
+        draw_table()
     else:
         sys.exit()
+
+def save_table():
+    str = ""
+    for y in [0, 1, 2]:
+        for x in [0, 1, 2]:
+            str += table[x][y]
+    file = open('tic_tac_toe.txt','w')
+    file.write(str)
+    file.close()
+
+def read_file_table():
+    file = open('tic_tac_toe.txt','r')
+    str = file.read()
+    for y in [0, 1, 2]:
+        for x in [0, 1, 2]:
+            #
+    print(str)
+    file.close()
 
 def clear_table():
     for y in [0, 1, 2]:
@@ -101,6 +120,7 @@ gui.bind('<Button-1>', click_b1)
 # set window size
 gui.geometry("600x600+100+100")
 gui.resizable(width=False, height=False)
+read_file_table()
 draw_field_game()
 canvas.pack()
 gui.mainloop()
