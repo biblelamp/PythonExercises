@@ -4,6 +4,7 @@ import random
 import sys
 
 table = [[".", ".", "."], [".", ".", "."], [".", ".", "."]]
+ini_file = 'tic_tac_toe.txt'
 
 def click_b1(event):
     x = event.x
@@ -20,6 +21,7 @@ def click_b1(event):
                 turn_AI()
                 draw_table()
                 save_table()
+                read_file_table()
                 if x_win("O"):
                     messagebox.showinfo("Information", "You lose")
                     retry()
@@ -73,18 +75,22 @@ def save_table():
     str = ""
     for y in [0, 1, 2]:
         for x in [0, 1, 2]:
-            str += table[x][y]
-    file = open('tic_tac_toe.txt','w')
+            str += table[x][y] + ","
+    file = open(ini_file,'w')
     file.write(str)
     file.close()
 
 def read_file_table():
-    file = open('tic_tac_toe.txt','r')
+    i = 0
+    file = open(ini_file,'r')
     str = file.read()
+    strr = str.split(',')
     for y in [0, 1, 2]:
         for x in [0, 1, 2]:
-            #
-    print(str)
+            table[x][y] = strr[i]
+            i += 1
+    draw_table()
+    print(strr)
     file.close()
 
 def clear_table():
